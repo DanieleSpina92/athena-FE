@@ -74,8 +74,8 @@ module.exports = (env = {}) => {
         patterns: [{ from: "public/images", to: "images" }],
       }),
       new ModuleFederationPlugin({
-        name: "aptsystem",
-        filename: "aptsystem.js",
+        name: "athena",
+        filename: "athena.js",
         remotes: {},
         exposes: {},
         shared: {

@@ -39,40 +39,6 @@ export default function HomePageContainer() {
   return (
     <Layout style={{ minHeight: "100vh" }}>
     
-
-      {isMobile && (
-        <Drawer
-          title={
-            <div style={{ textAlign: "center" }}>
-              <img
-                src="/images/logo-aptismart.png"
-                alt="Logo Aptismart"
-                style={{ height: 60, objectFit: "contain", marginBottom: 16 }}
-              />
-            </div>
-          }
-          placement="left"
-          onClose={toggleDrawer}
-          open={drawerVisible}
-          styles={{
-            body: {
-              padding: 0
-            }
-          }}
-          size={250}
-          style={{ height: "100vh" }}
-        >
-          <Menu
-            mode="inline"
-            defaultSelectedKeys={[selectedPage]}
-            selectedKeys={[selectedPage]}
-            items={dashBoardItems}
-            onClick={(info) => handleMenuSelect(info.key)}
-            style={{ height: "100%", borderRight: 0 }}
-          />
-        </Drawer>
-      )}
-
       <Layout>
         <HeaderBar role={"Admin"}>
           {isMobile && (

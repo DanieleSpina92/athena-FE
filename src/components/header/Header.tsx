@@ -28,7 +28,7 @@ export default function HeaderBar({ children, role }: HeaderBarProps) {
       <Space align="center" size="middle">
         <img
           src="/images/athena-logo.jpg"
-          alt="Logo Aptismart"
+          alt="Logo Athena"
           style={{ borderRadius:"50%", height: 50, objectFit: "contain", marginTop: "22px" }}
         />
         <Text style={{ color: "white", fontSize: 16 }}>
