@@ -6,6 +6,7 @@
   "scripts": {
     "serve:dev": "webpack serve --env aws=development --mode development",
     "serve:prd": "webpack serve --env aws=production --mode development",
+    "build": "npm run build:prd",
     "build:dev": "webpack --env aws=development --mode production",
     "build:prd": "webpack --env aws=production --mode production"
   },
