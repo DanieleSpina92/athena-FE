@@ -3,9 +3,9 @@ import { Steps, Button, Form, Input, Card } from "antd";
 import { CheckCircleOutlined } from "@ant-design/icons";
 
 const stepsData = [
-  { title: "Step 0 – Dati base" },
-  { title: "Step 1 – Dettagli" },
-  { title: "Step 2 – Conferma" },
+  { title: "Step 0" },
+  { title: "Step 1" },
+  { title: "Step 2" },
 ];
 
 export default function StepFormFlowHorizontal() {

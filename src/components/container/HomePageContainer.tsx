@@ -84,7 +84,7 @@ export default function HomePageContainer() {
           )}
         </HeaderBar>
 
-        <Content style={{ backgroundColor: "white" }}>
+        <Content style={{ backgroundColor: "rgb(240, 255, 245)" }}>
          <StepFormFlow/>
         </Content>
       </Layout>
