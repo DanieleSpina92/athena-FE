@@ -5,6 +5,7 @@ const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPl
 const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
 const deps = require("./package.json").dependencies;
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = (env = {}) => {
   const environment = env.aws || "development";
@@ -69,7 +70,9 @@ module.exports = (env = {}) => {
       new HtmlWebpackPlugin({
         template: "./public/index.html",
       }),
-
+      new CopyWebpackPlugin({
+        patterns: [{ from: "public/images", to: "images" }],
+      }),
       new ModuleFederationPlugin({
         name: "aptsystem",
         filename: "aptsystem.js",
