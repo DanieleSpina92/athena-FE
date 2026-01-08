@@ -1,0 +1,25 @@
+.linear_gradient_dark_apt {
+    background-image: linear-gradient(
+        -100deg,
+            rgba(0, 0, 0, 1),
+            rgba(153, 153, 153, 1)
+        ) !important;
+};
+
+.linear_gradient_blue_apt {
+    background: linear-gradient(
+        to right,
+            rgba(19, 22, 20, 1),
+            rgba(62, 139, 255, 1)
+        ) !important;
+};
+
+.gradient-border-card {
+    /* Use transparent so the background image is visible */
+    border: 10px solid transparent;
+    padding: 20px;
+    border-radius: 8px;
+    background-image: linear-gradient(-50deg, rgba(255,255,255,0.6), rgba(255,255,255,0)) !important;
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+};

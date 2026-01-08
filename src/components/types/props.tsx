@@ -4,6 +4,16 @@ import type { RangePickerProps } from "antd/es/date-picker";
 import type { ButtonProps } from "antd";
 import type { MenuProps } from "antd";
 
+export interface SidebarProps {
+  collapsed?: boolean;
+  onToggle?: () => void;
+  breakpoint?: "xs" | "sm" | "md" | "lg" | "xl" | "xxl";
+}
+
+export interface HeaderBarProps {
+  children?: ReactNode;
+  role: string
+}
 
 export interface MenuOptionsProps {
   value?: string;
@@ -27,7 +37,9 @@ export interface RangeDatePickerProps {
 
 export interface CustomButtonProps extends ButtonProps {
   label: React.ReactNode;
-  height?: number;
+  height?: number | string;
+  width?: number | string;
+  icon?: ReactNode;
 }
 
 export interface MenuListProps {
@@ -42,13 +54,72 @@ export interface MenuListProps {
   style?: React.CSSProperties;
 }
 
+export interface MenuItemProps {
+  itemKey: string;
+  label: React.ReactNode;
+  icon?: React.ReactNode;
+  disabled?: boolean;
+}
 
 export interface CardItemProps {
-  title?: React.ReactNode;
   value: React.ReactNode;
+  title?: React.ReactNode;
   description?: React.ReactNode;
   extra?: React.ReactNode;
   loading?: boolean;
-  bordered?: boolean;
+  variant?: 'outlined' | 'borderless';
+  style?: React.CSSProperties;
+  styleValue?: React.CSSProperties;
+  styleDescription?: React.CSSProperties;
+  className?: string;
+  icon?: React.ReactNode;
+}
+
+export interface CustomDialogProps {
+  open: boolean;
+  onClose: () => void;
+  headerContent?: ReactNode;
+  children?: ReactNode;
+  footerContent?: ReactNode;
+  width?: string;
+  minWidth?: string;
+  maxWidth?: string;
+  dialogBg?: string;
+  headerBg?: string;
+  footerBg?: string;
+  textColor?: string;
+  borderRadius?: string;
+  overlayBg?: string;
+}
+
+export interface CardItemWithDialogProps {
+  title: string;
+  value: string;
+  children: ReactNode;
+  dialogHeaderContent?: ReactNode;
+  style?: React.CSSProperties;
+  extra?: ReactNode | ((openDialog: () => void) => ReactNode);
+}
+
+export interface KpiSectionProps {
+  storeId?: number;
+  startDate: string;
+  endDate: string;
+}
+
+export interface CustomTableColumn<T> {
+  key: string;
+  title: string;
+  dataIndex: keyof T;
+  render?: (value: any, record: T, index: number) => React.ReactNode;
+}
+
+export interface CustomTableProps<T> {
+  columns: CustomTableColumn<T>[];
+  data: T[];
+  headerGradient?: string;
+  headerTextColor?: string;
+  rowGradient?: string;
+  rowTextColor?: string;
   style?: React.CSSProperties;
 }

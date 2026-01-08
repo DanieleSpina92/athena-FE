@@ -1,9 +1,8 @@
-import React from "react";
 import { Menu } from "antd";
 import { MenuListProps } from "../types/props";
 
 export default function MenuList({ items, ...props }: MenuListProps) {
-  return <Menu
+  return (<Menu
       {...props}
       items={items.map(item => ({
         key: item.key,
@@ -11,5 +10,5 @@ export default function MenuList({ items, ...props }: MenuListProps) {
         label: item.label,
         disabled: item.disabled,
       }))}
-    />
+    />)
 }

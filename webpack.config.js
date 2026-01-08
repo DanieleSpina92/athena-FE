@@ -1,44 +1,92 @@
 const path = require("path");
+const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
+const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
+const Dotenv = require("dotenv-webpack");
+const deps = require("./package.json").dependencies;
 
-module.exports = {
-  mode: "development",
-  entry: "./src/index.tsx",
+module.exports = (env = {}) => {
+  const environment = env.aws || "development";
+  const isProd = environment === "production";
+  console.log("Run with Env Configuration:", environment);
+  return {
+    mode: isProd ? "production" : "development",
 
-  output: {
-    filename: "bundle.js",
-    path: path.resolve(__dirname, "dist"),
-    clean: true,
-  },
-
-  resolve: {
-    extensions: [".tsx", ".ts", ".js"],
-  },
-
-  module: {
-    rules: [
-      {
-        test: /\.tsx?$/,
-        use: "ts-loader",
-        exclude: /node_modules/,
+    entry: "./src/index.tsx",
+    output: {
+      filename: "bundle.js",
+      path: path.resolve(__dirname, "dist"),
+      clean: true,
+      publicPath: "auto",
+    },
+    target: ["web", "es2017"],
+    resolve: {
+      extensions: [".tsx", ".ts", ".js", ".jsx", ".scss", ".css"],
+      modules: ["node_modules"],
+      fallback: {
+        buffer: require.resolve("buffer/"),
       },
-      {
-        test: /\.css$/,
-        use: ["style-loader", "css-loader"],
-      },
+    },
+
+    module: {
+      rules: [
+        {
+          test: /\.tsx?$/,
+          exclude: /node_modules/,
+          use: {
+            loader: "ts-loader",
+            options: {
+              transpileOnly: true,
+              allowTsInNodeModules: true,
+            },
+          },
+        },
+        {
+          test: /\.(js|jsx)$/,
+          exclude: /node_modules/,
+          use: "babel-loader",
+        },
+        {
+          test: /\.(sa|sc|c)ss$/,
+          use: ["style-loader", "css-loader", "sass-loader"],
+        },
+        {
+          test: /\.(png|jpg|gif|svg|woff|woff2|eot|ttf)$/,
+          loader: "url-loader",
+          options: { limit: false },
+        },
+      ],
+    },
+    plugins: [
+      new Dotenv({
+        path: `./config.${isProd ? "prd" : "dev"}.env`,
+      }),
+      new NodePolyfillPlugin(),
+      new webpack.ProvidePlugin({
+        Buffer: ["buffer", "Buffer"],
+      }),
+      new HtmlWebpackPlugin({
+        template: "./public/index.html",
+      }),
+
+      new ModuleFederationPlugin({
+        name: "aptsystem",
+        filename: "aptsystem.js",
+        remotes: {},
+        exposes: {},
+        shared: {
+          react: { singleton: true, requiredVersion: deps.react },
+          "react-dom": { singleton: true, requiredVersion: deps["react-dom"] },
+        },
+      }),
     ],
-  },
-
-  devServer: {
-    port: 3000,
-    open: true,
-    hot: true,
-    historyApiFallback: true,
-  },
-
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: "./public/index.html",
-    }),
-  ],
+    devServer: {
+      port: 3000,
+      open: true,
+      hot: true,
+      historyApiFallback: true,
+      client: { overlay: true },
+    },
+  };
 };
