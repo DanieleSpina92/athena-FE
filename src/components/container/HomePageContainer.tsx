@@ -5,6 +5,7 @@ import Sidebar from "../sidebar/Sidebar";
 import HeaderBar from "../header/Header";
 import DashboardSection from "../sections/DashboardSection";
 import { dashBoardItems } from "../../common/lang";
+import StepFormFlow from "../container/StepFormFlow";
 
 const { Content } = Layout;
 const { useBreakpoint } = Grid;
@@ -37,9 +38,7 @@ export default function HomePageContainer() {
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
-      {!isMobile && (
-        <Sidebar collapsed={collapsed} onToggle={toggleSidebar} breakpoint="md" />
-      )}
+    
 
       {isMobile && (
         <Drawer
@@ -75,7 +74,7 @@ export default function HomePageContainer() {
       )}
 
       <Layout>
-        <HeaderBar role={"StoreManager"}>
+        <HeaderBar role={"Admin"}>
           {isMobile && (
             <Button
               type="text"
@@ -85,10 +84,8 @@ export default function HomePageContainer() {
           )}
         </HeaderBar>
 
-        <Content style={{ backgroundColor: "black" }}>
-          <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }} >
-            {renderContent()}
-          </div>
+        <Content style={{ backgroundColor: "white" }}>
+         <StepFormFlow/>
         </Content>
       </Layout>
     </Layout>

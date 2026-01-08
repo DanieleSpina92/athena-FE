@@ -69,7 +69,7 @@ export const links = {
 
 export const headerSection = {
   role: {
-    label: "Ruolo"
+    label: "Role"
   }
 }
 
